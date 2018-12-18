@@ -142,10 +142,10 @@ a</code></pre>
   r &lt;- dlnorm(x, 3, 0.5)
   return(r)
 }
-a &lt;- integrate(f1, -Inf, Inf)
-b &lt;- 0.9*a$value - 0.1*a$value
-b</code></pre>
-<pre><code>## [1] 0.8</code></pre>
+q &lt;- qlnorm(c(0.1, 0.9), 3, 0.5)
+a &lt;- integrate(f1, q[1], q[2])
+a</code></pre>
+<pre><code>## 0.8 with absolute error &lt; 5.7e-12</code></pre>
 </div>
 
 

@@ -27,7 +27,7 @@ f1 <- function(x){
   r <- dlnorm(x, 3, 0.5)
   return(r)
 }
-a <- integrate(f1, -Inf, Inf)
-b <- 0.9*a$value - 0.1*a$value
-b
+q <- qlnorm(c(0.1, 0.9), 3, 0.5)
+a <- integrate(f1, q[1], q[2])
+a
 ```

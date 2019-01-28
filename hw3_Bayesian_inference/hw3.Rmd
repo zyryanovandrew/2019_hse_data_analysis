@@ -1,0 +1,51 @@
+---
+title: "hw3"
+author: "Andrey Zyryanov"
+date: '27 января 2019 г '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+library('tidyverse')
+```
+
+### 3.1
+
+```{r}
+data3.1 <- read_csv("https://raw.githubusercontent.com/agricolamz/2019_data_analysis_for_linguists/master/data/students/zyryanovandrew/hw3_Bayesian_inference/hw3_phoible.csv")
+
+res3.1 = 1
+for (c in data3.1$consonants){
+  res3.1 = res3.1*dnorm(c, 22, 6)
+}
+res3.1
+```
+
+### 3.2
+
+```{r}
+data3.2 <- read_csv("https://raw.githubusercontent.com/agricolamz/2019_data_analysis_for_linguists/master/data/letter_frequency.csv") %>% 
+  gather(key = language, value = prob, French:Finnish) %>% 
+  spread(key = letter, value = prob) %>% 
+  mutate(likelihood = m*o*s*t)
+
+update <- data_frame(model = data3.2$language,
+           prior = 1/length(model),
+           likelihood = data3.2$likelihood,
+           product = prior*likelihood,
+           posterior = product/sum(product))
+
+max(update$posterior)
+```
+
+### 3.3
+
+```{r}
+data3.3 <- read_csv("https://raw.githubusercontent.com/agricolamz/2019_data_analysis_for_linguists/master/data/students/zyryanovandrew/hw3_Bayesian_inference/hw3_task_3.csv") %>% 
+  mutate(apost = a+33) %>% 
+  mutate(bpost = b+77)
+
+res3.3 <- data3.3$apost/(data3.3$apost+data3.3$bpost)
+res3.3
+```

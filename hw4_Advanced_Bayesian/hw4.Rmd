@@ -1,0 +1,32 @@
+---
+title: "hw4"
+author: "Andrey Zyryanov"
+date: '11 февраля 2019 г '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("tidyverse")
+data <- read_csv("https://raw.githubusercontent.com/agricolamz/2019_data_analysis_for_linguists/master/data/students/zyryanovandrew/hw4_Advanced_Bayesian/hw4_caretta.csv") %>% 
+  group_by(speaker) %>% 
+  summarise(mean.prior = mean(vowel.dur, trim = 0.1),
+            sd.prior = sd(vowel.dur),
+            mean.data = mean(vowel.dur),
+            sd.data = sd(vowel.dur),
+            mean.post = weighted.mean(c(mean.prior, mean.data), c(1/sd.prior, 1/sd.data)),
+            sd.post = (1/sd.prior+1/sd.data)^(-1),
+            lower = qnorm(.025, mean.post, sd.post),
+            upper = qnorm(.975, mean.post, sd.post))
+```
+
+### 4.1
+```{r cars}
+data[1,c(1,6,7)]
+```
+
+### 4.2
+
+```{r pressure, echo=FALSE}
+data[5,c(1,8,9)]
+```

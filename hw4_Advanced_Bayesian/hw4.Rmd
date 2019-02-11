@@ -21,12 +21,12 @@ data <- read_csv("https://raw.githubusercontent.com/agricolamz/2019_data_analysi
 ```
 
 ### 4.1
-```{r cars}
+```{r}
 data[1,c(1,6,7)]
 ```
 
 ### 4.2
 
-```{r pressure, echo=FALSE}
+```{r}
 data[5,c(1,8,9)]
 ```
